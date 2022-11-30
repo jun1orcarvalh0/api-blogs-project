@@ -1,7 +1,7 @@
 const { User } = require('../models');
 
-const validateLogin = (email, password) => {
-  const user = User.findOne({
+const validateLogin = async (email, password) => {
+  const user = await User.findOne({
     where: { email, password },
   });
   return user;
