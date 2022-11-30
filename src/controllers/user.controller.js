@@ -4,15 +4,17 @@ const userService = require('../services/user.service');
 const createUser = async (req, res) => {
   const { displayName, email, password, image } = req.body;
 
-  const newUser = await userService.createUser({ displayName, email, password, image });
+  const userExists = await userService.getUserByEmail(email);
 
-  if (!newUser) {
-    return res.status(400).json({ message: 'User already registered' });
+  if (userExists) {
+    return res.status(409).json({ message: 'User already registered' });
   }
+
+  const newUser = await userService.createUser({ displayName, email, password, image });
 
   const token = generateToken(newUser);
 
-  return res.status(200).json({ token });
+  return res.status(201).json({ token });
 };
 
 module.exports = { createUser };
