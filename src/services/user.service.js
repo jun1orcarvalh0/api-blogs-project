@@ -12,4 +12,11 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-module.exports = { createUser, getUserByEmail };
+const findAll = async () => {
+  const users = await User.findAll();
+  const usersWithoutPassword = users.map((user) => user.dataValues)
+  .map(({ password, ...user }) => user);
+  return usersWithoutPassword;
+};
+
+module.exports = { createUser, getUserByEmail, findAll };
