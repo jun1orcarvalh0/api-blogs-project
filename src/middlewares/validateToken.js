@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, secret);
-    console.log(decoded);
+    req.user = decoded;
     return next();
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });

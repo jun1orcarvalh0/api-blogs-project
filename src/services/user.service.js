@@ -19,4 +19,15 @@ const findAll = async () => {
   return usersWithoutPassword;
 };
 
-module.exports = { createUser, getUserByEmail, findAll };
+const findById = async (id) => {
+  const user = await User.findByPk(id);
+
+  if (!user) {
+    return null;
+  }
+
+  const { password: _, ...userWithoutPassword } = user.dataValues;
+  return userWithoutPassword;
+};
+
+module.exports = { createUser, getUserByEmail, findAll, findById };

@@ -10,7 +10,7 @@ const getToken = async (req, res) => {
     return res.status(400).json({ message: 'Invalid fields' });
   }
 
-  const token = generateToken(user.email);
+  const token = generateToken(user.email, user.id, user.displayName);
 
   return res.status(200).json({ token });
 };
