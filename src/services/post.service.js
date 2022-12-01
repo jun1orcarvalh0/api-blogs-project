@@ -51,4 +51,17 @@ const findById = async (id) => {
   return post;
 };
 
-module.exports = { createPost, findAll, findById };
+const updatePost = async (title, content, id) => {
+  const updatedPost = await BlogPost.findByPk(id, 
+    { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+  { model: Category, as: 'categories', through: { attributes: [] } }] });
+  updatedPost.title = title;
+  updatedPost.content = content;
+  updatedPost.updated = new Date();
+
+  await updatedPost.save();
+
+  return updatedPost;
+};
+
+module.exports = { createPost, findAll, findById, updatePost };

@@ -37,4 +37,25 @@ const getPostById = async (req, res) => {
 
   return res.status(200).json(post);
 };
-module.exports = { createPost, getPosts, getPostById };
+
+const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const loginUser = req.user.id;
+
+  const oldPost = await postService.findById(id); 
+
+  if (!oldPost) {
+    return res.status(404).json({ message: 'Post does not exist' });
+  }
+
+  if (oldPost.userId !== loginUser) {
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+
+  const updatedPost = await postService.updatePost(title, content, id);
+  
+  return res.status(200).json(updatedPost);
+};
+
+module.exports = { createPost, getPosts, getPostById, updatePost };
