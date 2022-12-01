@@ -14,6 +14,10 @@ const createPost = async (req, res) => {
 
   const newPost = await postService.createPost(title, content, categoryIds, userId);
 
+  if (newPost.isError) { 
+    return res.status(400).json({ message: 'algo deu errado' });
+  }
+
   return res.status(201).json(newPost);
 };
 
