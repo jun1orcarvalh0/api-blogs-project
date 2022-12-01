@@ -4,8 +4,8 @@ const secret = process.env.JWT_SECRET;
 
 const jwtConfig = { algorithm: 'HS256' };
 
-const generateToken = (data) => {
-  const payload = jwt.sign({ data }, secret, jwtConfig);
+const generateToken = (email, id, displayName) => {
+  const payload = jwt.sign({ data: { email, id, displayName } }, secret, jwtConfig);
 
   return payload;
 };
