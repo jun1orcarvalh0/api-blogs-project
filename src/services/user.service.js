@@ -30,4 +30,9 @@ const findById = async (id) => {
   return userWithoutPassword;
 };
 
-module.exports = { createUser, getUserByEmail, findAll, findById };
+const deleteUser = async (id) => {
+  const user = await User.findByPk(id);
+  await user.destroy();
+};
+
+module.exports = { createUser, getUserByEmail, findAll, findById, deleteUser };
