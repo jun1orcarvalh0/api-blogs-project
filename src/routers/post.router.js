@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post('/', validateToken, validatePostFields, postController.createPost);
 router.put('/:id', validateToken, validateUpdatePostFields, postController.updatePost);
+router.delete('/:id', validateToken, postController.deletePost);
 router.get('/', validateToken, postController.getPosts);
 router.get('/:id', validateToken, postController.getPostById);
 
