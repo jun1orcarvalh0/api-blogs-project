@@ -6,6 +6,7 @@ const validateUpdatePostFields = require('../middlewares/validateUpdatePostField
 
 const router = express.Router();
 
+router.get('/search', validateToken, postController.getBySearchTerm);
 router.post('/', validateToken, validatePostFields, postController.createPost);
 router.put('/:id', validateToken, validateUpdatePostFields, postController.updatePost);
 router.delete('/:id', validateToken, postController.deletePost);
