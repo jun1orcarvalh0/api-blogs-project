@@ -36,9 +36,9 @@ services:
       - 3000:3000
     # Configura as variáveis de ambiente dentro do container
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_HOST: db # Nome do service logo abaixo
+      MYSQLUSER: root
+      MYSQLPASSWORD: password
+      MYSQLHOST: db # Nome do service logo abaixo
       JWT_SECRET: secretJWT
       API_HOST: 'node'
       API_PORT: 3000
